@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 interface MenuItem {
   link: string;
@@ -39,13 +40,17 @@ const Sidebar = ({ menuItems }: SidebarProps) => {
       <ul className="nav flex-column p-2">
         {menuItems.map((item, index) => (
           <li className="nav-item mb-2" key={index}>
-            <a
-              href={item.link}
-              className="nav-link text-white d-flex align-items-center"
+            <NavLink
+              to={item.link}
+              className={({ isActive }) =>
+                `nav-link d-flex align-items-center ${
+                  isActive ? "active bg-primary" : "text-white"
+                }`
+              }
             >
               <i className={`bi ${item.icon} me-2`}></i>
               {!isCollapsed && <span>{item.name}</span>}
-            </a>
+            </NavLink>
           </li>
         ))}
       </ul>
